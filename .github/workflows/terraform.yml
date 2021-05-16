@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   #Job 1
-  plan:
+  build_infrastructure:
     runs-on: ubuntu-latest
     defaults:
       run:
