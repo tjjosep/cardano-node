@@ -11,7 +11,7 @@ variable "prefix" {
 
 variable "region" {
   description = "The region where the resources are created."
-  default     = "us-east-1"
+  default     = "us-east-2"
 }
 
 variable "address_space" {
@@ -26,25 +26,10 @@ variable "subnet_prefix" {
 
 variable "instance_type" {
   description = "Specifies the AWS instance type."
-  default     = "t2.micro"
-}
-
-variable "admin_username" {
-  description = "Administrator user name for mysql"
-  default     = "hashicorp"
-}
-
-variable "height" {
-  default     = "400"
-  description = "Image height in pixels."
-}
-
-variable "width" {
-  default     = "600"
-  description = "Image width in pixels."
+  default     = "t2.medium"
 }
 
 variable "placeholder" {
-  default     = "placekitten.com"
-  description = "Image-as-a-service URL. Some other fun ones to try are fillmurray.com, placecage.com, placebeard.it, loremflickr.com, baconmockup.com, placeimg.com, placebear.com, placeskull.com, stevensegallery.com, placedog.net"
+  default     = "spiceworks.com"
+  description = "spice-as-a-service URL."
 }
