@@ -4,7 +4,7 @@ on:
   push
 
 jobs:
-  terraform:
+  terraform plan:
     name: 'Terraform'
     runs-on: ubuntu-latest
 
