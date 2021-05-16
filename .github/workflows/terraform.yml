@@ -39,7 +39,7 @@ jobs:
         terraform plan
   #Job 2      
   apply:
-    needs: terraform plan
+    needs: plan
     runs-on: ubuntu-latest
     defaults:
       run:
