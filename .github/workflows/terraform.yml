@@ -1,12 +1,10 @@
-name: 'Terraform'
-
+name: terraform
 on:
   push
 
 jobs:
-
   #Job 1
-  terraform plan:
+  plan:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,7 +38,7 @@ jobs:
       run: |
         terraform plan
   #Job 2      
-  terraform apply:
+  apply:
     needs: terraform plan
     runs-on: ubuntu-latest
     defaults:
