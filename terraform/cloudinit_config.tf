@@ -1,16 +1,16 @@
 data "cloudinit_config" "this_script" {
-  gzip = true
+  gzip          = true
   base64_encode = true
   part {
     content_type = "text/cloud-config"
-    content = (templatefile("./scripts/user_data.tpl", {}))
+    content      = (templatefile("./scripts/user_data.tpl", {}))
   }
   part {
     content_type = "text/x-shellscript"
     content = (templatefile("./scripts/cloud_watch.tpl", {
-      loggroup = aws_cloudwatch_log_group.this_log_group.id 
+      loggroup      = aws_cloudwatch_log_group.this_log_group.id
       componentname = "${var.prefix}-cardano-node"
-      region = var.region
+      region        = var.region
     }))
   }
 }

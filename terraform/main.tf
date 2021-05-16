@@ -88,13 +88,13 @@ resource "aws_route_table_association" "this_cardano_node_rt_assoc" {
 
 data "aws_ami" "this_linux" {
   most_recent = true
-  owners           = ["amazon"]
+  owners      = ["amazon"]
   filter {
     name   = "state"
     values = ["available"]
   }
   filter {
-    name = "name"
+    name   = "name"
     values = ["amzn2-ami-hvm-*"]
   }
   filter {
@@ -109,8 +109,8 @@ data "aws_ami" "this_linux" {
     name   = "root-device-type"
     values = ["ebs"]
   }
-  
-  
+
+
 }
 
 resource "tls_private_key" "this_cardano_node_pvt_key" {
