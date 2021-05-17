@@ -14,13 +14,11 @@ mv cabal ~/.local/bin/
 
 echo $PATH
 
-wget https://downloads.haskell.org/~ghc/8.10.2/ghc-8.10.2-x86_64-alpine3.10-linux-integer-simple.tar.xz
-tar -xf ghc-8.10.2-x86_64-alpine3.10-linux-integer-simple.tar.xz
-rm ghc-8.10.2-x86_64-alpine3.10-linux-integer-simple.tar.xz
-cd ghc-8.10.2
-./configure
-sudo make install
-cd ..
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+ghcup upgrade
+ghcup install 8.10.2
+ghcup set 8.10.2
+ghc --version
 
 git clone https://github.com/input-output-hk/libsodium
 cd libsodium
