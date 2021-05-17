@@ -1,6 +1,7 @@
 #!/bin/bash -xe
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 set -e
+
 sudo yum update -y
 yum install jq -y
 sudo yum install awslogs -y
@@ -18,7 +19,7 @@ initial_position = start_of_file
 EOF
 
 region=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r .region)
-sed -i -e "s/region = ${region}/region = $region/g" /etc/awslogs/awscli.conf
+sed -i -e "s/region = us-east-1/region = $region/g" /etc/awslogs/awscli.conf
 
 sudo systemctl start awslogsd
 sudo systemctl enable awslogsd.service
