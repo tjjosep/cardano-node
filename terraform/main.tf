@@ -131,6 +131,7 @@ resource "aws_instance" "this_cardano_node_instance" {
   subnet_id                   = aws_subnet.this_cardano_node_subnet.id
   vpc_security_group_ids      = [aws_security_group.this_cardano_node_sg.id]
   user_data                   = data.cloudinit_config.this_script.rendered
+  monitoring                  = true
 
   tags = {
     Name = "${var.prefix}-cardano-node-instance"
