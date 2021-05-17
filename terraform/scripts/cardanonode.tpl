@@ -5,7 +5,6 @@ sudo yum update -y
 sudo yum install git gcc gcc-c++ tmux gmp-devel make tar xz wget zlib-devel libtool autoconf -y
 sudo yum install systemd-devel ncurses-devel ncurses-compat-libs -y
 
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 
 wget https://downloads.haskell.org/~cabal/cabal-install-3.4.0.0/cabal-install-3.4.0.0-x86_64-alpine-3.11.6-static-noofd.tar.xz
 tar -xf cabal-install-3.4.0.0-x86_64-alpine-3.11.6-static-noofd.tar.xz
@@ -13,16 +12,15 @@ rm cabal-install-3.4.0.0-x86_64-alpine-3.11.6-static-noofd.tar.xz
 mkdir -p ~/.local/bin
 mv cabal ~/.local/bin/
 
+echo $PATH
 
-
-mkdir -p ~/src
-cd ~/src
-
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-ghcup upgrade
-ghcup install 8.10.2
-ghcup set 8.10.2
-ghc --version
+wget https://downloads.haskell.org/~ghc/8.10.2/ghc-8.10.2-x86_64-alpine3.10-linux-integer-simple.tar.xz
+tar -xf ghc-8.10.2-x86_64-alpine3.10-linux-integer-simple.tar.xz
+rm ghc-8.10.2-x86_64-alpine3.10-linux-integer-simple.tar.xz
+cd ghc-8.10.2
+./configure
+sudo make install
+cd ..
 
 git clone https://github.com/input-output-hk/libsodium
 cd libsodium

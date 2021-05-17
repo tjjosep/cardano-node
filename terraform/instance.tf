@@ -33,6 +33,7 @@ resource "aws_instance" "this_cardano_node_instance" {
   vpc_security_group_ids      = [aws_security_group.this_cardano_node_sg.id]
   user_data                   = data.cloudinit_config.this_script.rendered
   monitoring                  = true
+  iam_instance_profile        = aws_iam_instance_profile.this_ec2_instance_profile.name
 
   tags = {
     Name = "${var.prefix}-cardano-node-instance"
