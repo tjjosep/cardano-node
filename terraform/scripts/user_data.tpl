@@ -1,5 +1,5 @@
 #cloud-config
 packages:
- - awscli
+  - awscli
 cloud_final_modules:
   - [scripts-user, always]
