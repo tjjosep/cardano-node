@@ -4,6 +4,7 @@ set -e
 
 sudo yum update -y
 yum install jq -y
+sudo yum install amazon-cloudwatch-agent -y
 sudo yum install awslogs -y
 
 cat > /etc/awslogs/awslogs.conf <<- EOF
