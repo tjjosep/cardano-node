@@ -16,7 +16,7 @@ resource "aws_iam_role" "this_ec2_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "this_service_policy_attach" {
-  count = length(local.role_policy_arns)
+  count      = length(local.role_policy_arns)
   role       = aws_iam_role.this_ec2_role.name
   policy_arn = element(local.role_policy_arns, count.index)
 }
