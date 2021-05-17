@@ -12,39 +12,25 @@ resource "aws_iam_instance_profile" "this_ec2_instance_profile" {
 
 resource "aws_iam_role" "this_ec2_role" {
   name               = "${var.prefix}-cardano-node-role"
-  path               = "/"
-  assume_role_policy = aws_iam_policy.this_ec2_assume_policy.id
+  assume_role_policy = data.aws_iam_policy_document.this_ec2_assume_role_policy_doc.json
 }
 
 resource "aws_iam_role_policy_attachment" "this_service_policy_attach" {
   count = length(local.role_policy_arns)
-
   role       = aws_iam_role.this_ec2_role.name
   policy_arn = element(local.role_policy_arns, count.index)
 }
 
-resource "aws_iam_role_policy" "this_cloudwatch_policy_attach" {
+resource "aws_iam_role_policy" "this_inline_cloudwatch_policy" {
   name   = "${var.prefix}-cardano-node-cloudwatch-policy-attach"
   role   = aws_iam_role.this_ec2_role.id
-  policy = aws_iam_policy.this_cloudwatch_policy.id
-}
-
-resource "aws_iam_policy" "this_ec2_assume_policy" {
-  name   = "${var.prefix}-cardano-node-service"
-  path   = "/"
-  policy = data.aws_iam_policy_document.this_ec2_assume_role_policy_doc.json
-}
-
-resource "aws_iam_policy" "this_cloudwatch_policy" {
-  name   = "${var.prefix}-cardano-node-cloudwatch"
-  path   = "/"
   policy = data.aws_iam_policy_document.this_cloudwatch_doc.json
 }
 
 data "aws_iam_policy_document" "this_ec2_assume_role_policy_doc" {
   statement {
     actions = ["sts:AssumeRole"]
-    effect  = "Allow"
+
     principals {
       type        = "Service"
       identifiers = ["ec2.amazonaws.com"]
@@ -52,32 +38,23 @@ data "aws_iam_policy_document" "this_ec2_assume_role_policy_doc" {
   }
 }
 
-
 data "aws_iam_policy_document" "this_cloudwatch_doc" {
   statement {
     sid = "1"
-
     actions = [
       "ssm:GetParameter",
     ]
-
-    resources = [
-      "*",
-    ]
+    resources = ["*"]
   }
   statement {
     sid = "2"
-
     actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents",
       "logs:DescribeLogStreams",
     ]
-
-    resources = [
-      "arn:aws:logs:::*",
-    ]
+    resources = ["arn:aws:logs:::*"]
   }
 }
 
