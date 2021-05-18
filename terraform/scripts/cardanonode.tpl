@@ -20,12 +20,16 @@ echo $PATH
 
 mkdir -p ~/src
 cd ~/src
-wget https://downloads.haskell.org/ghc/8.10.2/ghc-8.10.2-x86_64-deb9-linux.tar.xz
-tar -xf ghc-8.10.2-x86_64-deb9-linux.tar.xz
-rm ghc-8.10.2-x86_64-deb9-linux.tar.xz
+wget https://downloads.haskell.org/~ghc/8.10.2/ghc-8.10.2-x86_64-centos7-linux.tar.xz
+tar -xf ghc-8.10.2-x86_64-centos7-linux.tar.xz
+rm ghc-8.10.2-x86_64-centos7-linux.tar.xz
 cd ghc-8.10.2
 ./configure
 sudo make install
+cd ..
+
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 mkdir -p ~/src
 cd ~/src
@@ -36,9 +40,6 @@ git checkout 66f017f1
 ./configure
 make
 sudo make install
-
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 mkdir -p ~/src
 cd ~/src
