@@ -22,7 +22,6 @@ tar -xf ghc-8.10.2-x86_64-centos7-linux.tar.xz
 rm ghc-8.10.2-x86_64-centos7-linux.tar.xz
 cd ghc-8.10.2
 ./configure
-pkexec s
 chmod 440 ~/etc/sudoers && chmod 775 ~/etc/sudoers.d && chmod 440 ~/etc/sudoers.d/README
 sudo make install
 cd ..
