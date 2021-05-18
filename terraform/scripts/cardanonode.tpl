@@ -14,14 +14,17 @@ mv cabal ~/.local/bin/
 
 echo $PATH
 
-# complete bootstrap
-curl https://gitlab.haskell.org/haskell/ghcup/raw/master/bootstrap-haskell -sSf | sh
+mkdir -p ~/src
+cd ~/src
+wget https://downloads.haskell.org/ghc/8.10.2/ghc-8.10.2-x86_64-deb9-linux.tar.xz
+tar -xf ghc-8.10.2-x86_64-deb9-linux.tar.xz
+rm ghc-8.10.2-x86_64-deb9-linux.tar.xz
+cd ghc-8.10.2
+./configure
+sudo make install
 
-# prepare your environment
-. "$HOME/.ghcup/env"
-echo '. $HOME/.ghcup/env' >> "$HOME/.bashrc" # or similar
-
-
+mkdir -p ~/src
+cd ~/src
 git clone https://github.com/input-output-hk/libsodium
 cd libsodium
 git checkout 66f017f1
@@ -33,7 +36,8 @@ sudo make install
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
-cd
+mkdir -p ~/src
+cd ~/src
 git clone https://github.com/input-output-hk/cardano-node.git
 ls cardano-node
 cd cardano-node
