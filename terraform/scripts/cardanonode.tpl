@@ -14,11 +14,13 @@ mv cabal ~/.local/bin/
 
 echo $PATH
 
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-ghcup upgrade
-ghcup install 8.10.2
-ghcup set 8.10.2
-ghc --version
+# complete bootstrap
+curl https://gitlab.haskell.org/haskell/ghcup/raw/master/bootstrap-haskell -sSf | sh
+
+# prepare your environment
+. "$HOME/.ghcup/env"
+echo '. $HOME/.ghcup/env' >> "$HOME/.bashrc" # or similar
+
 
 git clone https://github.com/input-output-hk/libsodium
 cd libsodium
