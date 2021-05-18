@@ -8,7 +8,7 @@ rpm --setugids sudo && rpm --setperms sudo
 sudo yum update -y
 sudo yum install git gcc gcc-c++ tmux gmp-devel make tar xz wget zlib-devel libtool autoconf -y
 sudo yum install systemd-devel ncurses-devel ncurses-compat-libs -y
-
+sudo yum install g++ gmp  ncurses realpath xz-utils -y
 
 wget https://downloads.haskell.org/~cabal/cabal-install-3.4.0.0/cabal-install-3.4.0.0-x86_64-alpine-3.11.6-static-noofd.tar.xz
 tar -xf cabal-install-3.4.0.0-x86_64-alpine-3.11.6-static-noofd.tar.xz
@@ -18,10 +18,8 @@ mv cabal ~/.local/bin/
 
 echo $PATH
 
-curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-ghcup upgrade
-ghcup install 8.10.2
-ghcup set 8.10.2
+curl -sSL https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo | sudo tee /etc/yum.repos.d/fpco.repo
+sudo yum -y install stack
 ghc --version
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
