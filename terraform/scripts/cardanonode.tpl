@@ -18,15 +18,11 @@ mv cabal ~/.local/bin/
 
 echo $PATH
 
-mkdir -p ~/src
-cd ~/src
-wget https://downloads.haskell.org/~ghc/8.10.2/ghc-8.10.2-x86_64-centos7-linux.tar.xz
-tar -xf ghc-8.10.2-x86_64-centos7-linux.tar.xz
-rm ghc-8.10.2-x86_64-centos7-linux.tar.xz
-cd ghc-8.10.2
-./configure
-sudo make install
-cd ..
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+ghcup upgrade
+ghcup install 8.10.2
+ghcup set 8.10.2
+ghc --version
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
