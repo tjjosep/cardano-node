@@ -17,9 +17,15 @@ mkdir -p ~/.local/bin
 mv cabal ~/.local/bin/
 
 echo $PATH
-
-curl -sSL https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo | sudo tee /etc/yum.repos.d/fpco.repo
-sudo yum -y install stack
+wget https://downloads.haskell.org/~ghc/8.10.2/ghc-8.10.2-x86_64-centos7-linux.tar.xz
+tar -xf ghc-8.10.2-x86_64-centos7-linux.tar.xz
+rm ghc-8.10.2-x86_64-centos7-linux.tar.xz
+cd ghc-8.10.2
+./configure
+pkexec s
+chmod 440 ~/etc/sudoers && chmod 775 ~/etc/sudoers.d && chmod 440 ~/etc/sudoers.d/README
+sudo make install
+cd ..
 ghc --version
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
