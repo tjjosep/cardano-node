@@ -35,6 +35,13 @@ resource "aws_instance" "this_cardano_node_instance" {
   monitoring                  = true
   iam_instance_profile        = aws_iam_instance_profile.this_ec2_instance_profile.name
 
+  root_block_device {
+    delete_on_termination = true
+    volume_size           = 40
+    volume_type           = "gp2"
+
+  }
+
   tags = {
     Name = "${var.prefix}-cardano-node-instance"
   }
