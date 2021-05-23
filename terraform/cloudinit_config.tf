@@ -3,18 +3,31 @@ data "cloudinit_config" "this_script" {
   base64_encode = true
   part {
     content_type = "text/cloud-config"
-    content = (templatefile("./scripts/user_data.tpl", {
+    content = (templatefile("./scripts/userdata.tpl", {
       loggroup      = aws_cloudwatch_log_group.this_log_group.id
       componentname = "${var.prefix}-cardano-node"
-      region        = var.region
     }))
   }
   part {
     content_type = "text/x-shellscript"
-    content = templatefile("./scripts/cloud_watch.tpl", {
+    content = templatefile("./scripts/cloudwatch.tpl", {
       loggroup      = aws_cloudwatch_log_group.this_log_group.id
       componentname = "${var.prefix}-cardano-node"
-      region        = var.region
+    })
+  }
+  # part {
+  #   content_type = "text/x-shellscript"
+  #   content = templatefile("./scripts/volumemount.tpl", {
+  #     cardanovolumeid     = aws_ebs_volume.this_ebs_volume.id
+  #     cardanovalumelabel  = "CARDANONODE"
+  #     cardanodevicename   = "/dev/xvdf"
+  #   })
+  # }
+  part {
+    content_type = "text/x-shellscript"
+    content = templatefile("./scripts/cardanonode.tpl", {
+      loggroup      = aws_cloudwatch_log_group.this_log_group.id
+      componentname = "${var.prefix}-cardano-node"
     })
   }
 }

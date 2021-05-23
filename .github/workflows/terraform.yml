@@ -37,7 +37,7 @@ jobs:
       run: |
         terraform plan
 
-  #Job 1
+  #Job 2
   apply_infrastructure:
     runs-on: ubuntu-latest
     needs: plan_infrastructure
