@@ -15,6 +15,14 @@ data "cloudinit_config" "this_script" {
       componentname = "${var.prefix}-cardano-node"
     })
   }
+  # part {
+  #   content_type = "text/x-shellscript"
+  #   content = templatefile("./scripts/volumemount.tpl", {
+  #     cardanovolumeid     = aws_ebs_volume.this_ebs_volume.id
+  #     cardanovalumelabel  = "CARDANONODE"
+  #     cardanodevicename   = "/dev/xvdf"
+  #   })
+  # }
   part {
     content_type = "text/x-shellscript"
     content = templatefile("./scripts/cardanonode.tpl", {
