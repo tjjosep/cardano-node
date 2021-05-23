@@ -15,7 +15,7 @@ mv cabal ~/.local/bin/
 
 echo $PATH
 export PATH="~/.local/bin:$PATH"
-source .bashrc
+source ~/.bashrc
 cabal update
 cabal --version
 
