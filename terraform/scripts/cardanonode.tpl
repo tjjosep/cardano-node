@@ -14,18 +14,20 @@ mkdir -p ~/.local/bin
 mv cabal ~/.local/bin/
 
 echo $PATH
-wget https://downloads.haskell.org/~ghc/8.10.2/ghc-8.10.2-x86_64-centos7-linux.tar.xz
-tar -xf ghc-8.10.2-x86_64-centos7-linux.tar.xz
-rm ghc-8.10.2-x86_64-centos7-linux.tar.xz
+export PATH="~/.local/bin:$PATH"
+source .bashrc
+cabal update
+cabal --version
+
+mkdir -p ~/src
+cd ~/src
+wget https://downloads.haskell.org/ghc/8.10.2/ghc-8.10.2-x86_64-deb9-linux.tar.xz
+tar -xf ghc-8.10.2-x86_64-deb9-linux.tar.xz
+rm ghc-8.10.2-x86_64-deb9-linux.tar.xz
 cd ghc-8.10.2
 ./configure
-chmod 440 ~/etc/sudoers && chmod 775 ~/etc/sudoers.d && chmod 440 ~/etc/sudoers.d/README
 sudo make install
-cd ..
 ghc --version
-
-export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 mkdir -p ~/src
 cd ~/src
@@ -36,6 +38,9 @@ git checkout 66f017f1
 ./configure
 make
 sudo make install
+
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 mkdir -p ~/src
 cd ~/src
